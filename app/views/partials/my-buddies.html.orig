@@ -1,0 +1,124 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-3 text-center">
+            <div class="avatar">
+                <img src="//az799877.vo.msecnd.net/images/characters/lenny/lenny-avatar-icon.png" class="img-responsive center-block">
+                <h3>Me</h3>
+                <a href="#">Change Avatar</a>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <img src="//az799877.vo.msecnd.net/images/characters/bubbles/bubbles-avatar-icon.png" class="img-responsive" ng-click="openMessagesModal('bubbles',userMessages.bubbles)">
+                <div class="caption">Bubbles <span class="badge badge-warning" id="bubbles_badge" ng-show="userMessages.bubbles.length>0">{{userMessages.bubbles.length}}</span></div>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <img src="//az799877.vo.msecnd.net/images/characters/flexi/flexi-avatar-icon.png" class="img-responsive" ng-click="openMessagesModal('flexi',userMessages.flexi)">
+                <div class="caption">Flexi <span class="badge badge-warning" id="flexi_badge" ng-show="userMessages.flexi.length>0">{{userMessages.flexi.length}}</span></div>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <img src="//az799877.vo.msecnd.net/images/characters/lenny/lenny-avatar-icon.png" class="img-responsive" ng-click="openMessagesModal('lenny',userMessages.lenny)">
+                <div class="caption">Lenny <span class="badge badge-warning" id="lenny_badge" ng-show="userMessages.lenny.length>0">{{userMessages.lenny.length}}</span></div>
+            </div>
+        </div>
+
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <img src="//az799877.vo.msecnd.net/images/characters/lionstein/lionstein-avatar-icon.png" class="img-responsive" ng-click="openMessagesModal('lionstein',userMessages.lionstein)">
+                <div class="caption">Lionstein <span class="badge badge-warning" id="lionstein_badge" ng-show="userMessages.lionstein.length>0">{{userMessages.lionstein.length}}</span></div>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <img src="//az799877.vo.msecnd.net/images/characters/lucy/lucy-avatar-icon.png" class="img-responsive" ng-click="openMessagesModal('lucy',userMessages.lucy)">
+                <div class="caption">Lucy <span class="badge badge-warning" id="lucy_badge" ng-show="userMessages.lucy.length>0">{{userMessages.lucy.length}}</span></div>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <img src="//az799877.vo.msecnd.net/images/characters/misschievous/miss-chievous-avatar-icon.png" class="img-responsive" ng-click="openMessagesModal('misschievous',userMessages.misschievous)">
+                <div class="caption">Miss Chievous <span class="badge badge-warning" id="misschievous_badge" ng-show="userMessages.misschievous.length>0">{{userMessages.misschievous.length}}</span></div>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <img src="//az799877.vo.msecnd.net/images/characters/ping/ping-avatar-icon.png" class="img-responsive" ng-click="openMessagesModal('ping',userMessages.ping)">
+                <div class="caption">Ping <span class="badge badge-warning" id="ping_badge" ng-show="userMessages.ping.length>0">{{userMessages.ping.length}}</span></div>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <img src="//az799877.vo.msecnd.net/images/characters/tito/tito-avatar-icon.png" class="img-responsive" ng-click="openMessagesModal('tito',userMessages.tito)">
+                <div class="caption">Tito <span class="badge badge-warning" id="tito_badge" ng-show="userMessages.tito.length>0">{{userMessages.tito.length}}</span></div>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <img src="//az799877.vo.msecnd.net/images/characters/toucan/toucan-avatar-icon.png" class="img-responsive" ng-click="openMessagesModal('twoplus',userMessages.twoplus)">
+                <div class="caption">Twoplus <span class="badge badge-warning" id="twoplus_badge" ng-show="userMessages.twoplus.length>0">{{userMessages.twoplus.length}}</span></div>
+            </div>
+        </div>
+    </div><!-- /.row (1) -->
+</div>
+<div class="container">
+<<<<<<< HEAD
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-sm-push-3">
+            <div class="my-buddies-form refer-a-friend">
+                <div class="row">
+                    <div class="col-xs-push-4 col-xs-8 text-center">
+                        <h2 class="kb-planet-earth">Refer-A-Friend</h2>
+                        <p>Enter to win a plush Bubbles by referring friends to BubblesU.com</p>
+                        <form>
+                            <div class="row">
+                                <div class="col-xs-10 col-xs-push-1 no-padding">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Friend's e-mail">
+                                        <span class="input-group-btn">
+                                            <button class="btn" type="submit">Submit</button>
+                                        </span>
+                                    </div><!-- /input-group -->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="plush-toy">
+                    <img src='//az799877.vo.msecnd.net/images/characters/bubbles/bubbles-plush-toy.png' class="img-responsive">
+                </div>
+            </div>
+        </div>
+    </div><!-- /.row (2) -->
+=======
+	<div class="row">
+	  <div class="col-xs-12 col-sm-6 col-sm-push-3">
+		<div class="my-buddies-form refer-a-friend media">
+			<div class="media">
+				<div class="media-left media-middle">
+					<div class="plush-toy">
+						<img src='//az799877.vo.msecnd.net/images/characters/bubbles/bubbles-plush-toy.png' class="img-responsive">
+					</div>
+				</div>
+				<div class="media-body text-center">
+					<h2 class="media-heading kb-planet-earth">Refer-A-Friend</h2>
+					<p>Enter to win a plush Bubbles by referring friends to BubblesU.com</p>
+					<form>
+						<div class="input-group">
+							<input type="email" class="form-control" placeholder="Friend's e-mail">
+							<span class="input-group-btn">
+								<button class="btn" type="submit">Submit</button>
+							</span>
+						</div><!-- /input-group -->
+	  			  	</form>
+				</div>
+			</div>
+
+		</div>
+	  </div>
+	</div><!-- /.row (2) -->
+>>>>>>> cgilbert
+</div>

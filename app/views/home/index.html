@@ -1,0 +1,481 @@
+<div class="page-content">
+    <div class="{{homeVm.characterState}} character-page">
+        <div class="container">
+            <div class="row">
+            </div>
+        </div>
+        <div class="categories-container">
+            <div class="container">
+                <div class="row categories">  
+                    <!-- Content Sliders -->
+                    <div class="col-xs-12">
+
+                        <!-- Videos -->
+                        <div id="movies" class="row category-video"
+                             data-ng-if="homeVm.filtered[homeVm.characterState].Videos.length > 0">
+                            <div class="col-xs-12"
+                                 data-ng-class="{'col-md-2': homeVm.characterState == 'bubblesu'}">
+                                <div class="center-block slider-icon" id="category-video-icon" play-sound sound="videoIcon" toggle="mouseenter touchstart"></div>
+                            </div>
+                            <div class="col-xs-12"
+                                 data-ng-class="{'col-md-10': homeVm.characterState == 'bubblesu'}">
+                                <div class="owl_slider"
+                                     data-ng-class="{'owl-carousel owl-theme center-block': true, 'user': homeVm.isLoggedIn === true, 'guest': homeVm.isLoggedIn === false}"
+                                     id="videosSlider">
+                                    <div class="item"
+                                         data-ng-repeat="object in homeVm.filtered[homeVm.characterState].Videos | unique: 'SiteObject.id'"
+                                         init-slider>
+                                        <div class="slider-panel">
+                                            <img src="//placehold.it/140x111/943885/ffa023?text=placeholder+thumbnail"
+                                                 data-ng-if="object.SiteObject.thumbnail_path === null"
+                                                 class="slider-thumbnail img-responsive"
+                                                 alt="{{::object.SiteObject.name}}">
+                                            <img data-ng-src="{{::object.SiteObject.thumbnail_path}}"
+                                                 data-ng-if="object.SiteObject.thumbnail_path !== null"
+                                                 class="slider-thumbnail img-responsive lazyOwl"
+                                                 alt="{{::object.SiteObject.name}}">
+                                            <img data-ng-if="showSharingIcons"
+                                                 src="//cdn.bubblesu.com/images/buttons/share-button.png"
+                                                 class="thumbnail-share-button">
+
+                                            <div class="slider-panel-controls">
+                                                <bubblesu-heart site-object="object"
+                                                                user-id="index.userId"></bubblesu-heart>
+                                                <div class="slider-panel-controls-play thumbnail-play-button"
+                                                     data-ng-click="index.openVideoModal($event,object)"
+                                                     alt="Play {{object.SiteObject.name}}" analytics-on analytics-event="Open" analytics-category="Videos" analytics-label="{{::object.SiteObject.name}}"></div>
+                                            </div>
+
+                                            <div class="slider-panel-caption">
+                                                {{::object.SiteObject.name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Online Games -->
+                        <div id="games" class="row category-games"
+                             data-ng-if="homeVm.filtered[homeVm.characterState].Games.length > 0">
+                            <div class="col-xs-12"
+                                 data-ng-class="{'col-md-2': homeVm.characterState == 'bubblesu'}">
+                                <div class="center-block slider-icon" id="category-games-icon" play-sound sound="gamesIcon" toggle="mouseenter touchstart"></div>
+                            </div>
+                            <div class="col-xs-12"
+                                 data-ng-class="{'col-md-10': homeVm.characterState == 'bubblesu'}">
+                                <div class="owl_slider"
+                                     data-ng-class="{'owl-carousel owl-theme center-block': true, 'user': homeVm.isLoggedIn === true, 'guest': homeVm.isLoggedIn === false}"
+                                     id="gamesSlider">
+                                    <div class="item"
+                                         data-ng-repeat="object in homeVm.filtered[homeVm.characterState].Games | unique: 'SiteObject.id'"
+                                         init-slider>
+                                        <div class="slider-panel">
+                                            <img src="//placehold.it/140x111/943885/ffa023?text=placeholder+thumbnail"
+                                                 data-ng-if="object.SiteObject.thumbnail_path === null"
+                                                 class="slider-thumbnail img-responsive"
+                                                 alt="{{::object.SiteObject.name}}">
+                                            <img data-ng-src="{{::object.SiteObject.thumbnail_path}}"
+                                                 data-ng-if="object.SiteObject.thumbnail_path !== null"
+                                                 class="slider-thumbnail img-responsive lazyOwl"
+                                                 alt="{{::object.SiteObject.name}}">
+                                            <img data-ng-if="showSharingIcons"
+                                                 src="//cdn.bubblesu.com/images/buttons/share-button.png"
+                                                 class="thumbnail-share-button">
+
+                                            <div class="slider-panel-controls">
+                                                <bubblesu-heart class="slider-panel-controls-heart" site-object="object"
+                                                                user-id="index.userId"></bubblesu-heart>
+                                                <div class="slider-panel-controls-play thumbnail-play-button"
+                                                     data-ng-click="index.openGameModal($event,object)"
+                                                     alt="Play {{::object.SiteObject.name}}" analytics-on analytics-event="Open" analytics-category="Games" analytics-label="{{::object.SiteObject.name}}"></div>
+                                            </div>
+
+                                            <div class="slider-panel-caption">
+                                                {{::object.SiteObject.name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Color & Create -->
+                        <div id="colorCreate" class="row category-color"
+                             data-ng-if="homeVm.filtered[homeVm.characterState].ColorCreate.length > 0">
+                            <div class="col-xs-12"
+                                 data-ng-class="{'col-md-2': homeVm.characterState == 'bubblesu'}">
+                                <div class="center-block slider-icon" id="category-color-icon" play-sound sound="colorAndCreateIcon" toggle="mouseenter touchstart"></div>
+                            </div>
+                            <div class="col-xs-12"
+                                 data-ng-class="{'col-md-10': homeVm.characterState == 'bubblesu'}">
+                                <div class="owl_slider"
+                                     data-ng-class="{'owl-carousel owl-theme center-block': true, 'user': homeVm.isLoggedIn === true, 'guest': homeVm.isLoggedIn === false}"
+                                     id="colorSlider">
+                                    <div class="item"
+                                         data-ng-repeat="object in homeVm.filtered[homeVm.characterState].ColorCreate | unique: 'SiteObject.id'"
+                                         init-slider>
+                                        <div class="slider-panel" id="{{::object.SiteObject.short_name}}" play-sound toggle="mouseenter touchstart" colorcreate="true">
+                                            <img src="//placehold.it/140x111/943885/ffa023?text=placeholder+thumbnail"
+                                                 data-ng-if="object.SiteObject.thumbnail_path === null"
+                                                 class="slider-thumbnail img-responsive"
+                                                 alt="{{::object.SiteObject.name}}">
+                                            <img data-ng-src="{{::object.SiteObject.thumbnail_path}}"
+                                                 data-ng-if="object.SiteObject.thumbnail_path !== null"
+                                                 class="slider-thumbnail img-responsive lazyOwl"
+                                                 alt="{{::object.SiteObject.name}}" id="{{::object.SiteObject.short_name}}">
+                                            <img data-ng-if="showSharingIcons"
+                                                 src="//cdn.bubblesu.com/images/buttons/share-button.png"
+                                                 class="thumbnail-share-button">
+
+                                            <div class="slider-panel-controls">
+                                                <bubblesu-heart site-object="object"
+                                                                user-id="index.userId"></bubblesu-heart>
+                                                <div class="slider-panel-controls-play thumbnail-play-button"
+                                                     data-ng-click="index.openColorCreateModal($event,object)"
+                                                     alt="Play {{::object.SiteObject.name}}" analytics-on analytics-event="Open" analytics-category="Color & Create" analytics-label="{{::object.SiteObject.name}}"></div>
+                                            </div>
+                                            <div class="slider-panel-caption">
+                                                {{::object.SiteObject.name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--<div class="background-sprite {{homeVm.characterState}}-sprite" data-ng-if="homeVm.characterState !== 'bubblesu'">-->
+        <!--<img data-ng-src="//cdn.bubblesu.com/images/character_pages/{{homeVm.characterState}}.png">-->
+        <!--</div>-->
+    </div>
+    <!-- Reading Corner -->
+    <div id="readingCorner" scroll-class="visible" scroll-offset="100">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-10 col-lg-9 col-lg-offset-1 reading-corner-container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <img src="//cdn.bubblesu.com/images/headline/readingcorner-headline.png"
+                                 class="img-responsive reading-title buzz-out" alt="BubblesU Reading Corner"
+                                 play-sound sound="readingCornerIcon" toggle="mouseenter touchstart"
+                            >
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="owl_slider owl-carousel owl-theme center-block" id="readingSlider">
+                                <div data-ng-repeat="object in homeVm.filtered.ReadingCorner" init-slider>
+                                    <div class="slider-panel">
+                                        <img src="//placehold.it/140x111/943885/ffa023?text=placeholder+thumbnail"
+                                             data-ng-if="object.SiteObject.thumbnail_path === null"
+                                             class="slider-thumbnail img-responsive" alt="{{::object.SiteObject.name}}">
+                                        <img data-ng-src="{{::object.SiteObject.thumbnail_path}}"
+                                             data-ng-if="object.SiteObject.thumbnail_path !== null"
+                                             class="slider-thumbnail img-responsive lazyOwl"
+                                             alt="{{::object.SiteObject.name}}">
+                                        <img data-ng-if="showSharingIcons"
+                                             src="//cdn.bubblesu.com/images/buttons/share-button.png"
+                                             class="thumbnail-share-button">
+
+                                        <div class="slider-panel-controls">
+                                            <bubblesu-heart site-object="object"
+                                                            user-id="index.userId"></bubblesu-heart>
+                                            <div class="slider-panel-controls-play thumbnail-play-button"
+                                                 data-ng-click="index.openVideoModal($event,object)"
+                                                 alt="Play {{::object.SiteObject.name}}" analytics-on analytics-event="Open" analytics-category="Reading Corner" analytics-label="{{::object.SiteObject.name}}"></div>
+                                        </div>
+
+                                        <div class="slider-panel-caption">
+                                            {{::object.SiteObject.name}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden-sm">
+                    <div id="readingBubbles">
+                        <img src="//cdn.bubblesu.com/images/characters/bubbles/readingcorner-bubbles.png"
+                             role="presentation" alt="Bubbles the Elephant">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Green Page-->
+    <div class="{{::homeVm.characterState}} green-page character-page" data-ng-if="homeVm.characterState == 'bubblesu'">
+        <div class="container">
+            <div class="row categories">
+
+                <!--<div data-ng-class="{'col-xs-12':true,'col-md-11 col-md-push-1 col-lg-10 col-lg-push-2':homeVm.characterState!=='bubblesu'}">-->
+                <div class="col-xs-12 col-md-12 col-md-offset-0 col-lg-10 col-lg-offset-1">
+
+                    <!-- Recipes -->
+                    <div id="recipes" class="row category category-recipes"
+                         data-ng-if="homeVm.filtered.Recipes.length > 0">
+                        <div class="hidden-sm hidden-xs col-sm-2 col-sm-pull-1 col-md-pull-0"
+                             style="position: relative; z-index:10;">
+                            <img src="//cdn.bubblesu.com/images/characters/bubbles/recipes-bubbles.png" class="buzz-out" height="230"
+                                 style="margin-top: -20px;"
+                            />
+                        </div>
+                        <div class="col-xs-12 col-md-10">
+                            <div class="center-block slider-icon" id="category-recipes-icon" play-sound sound="recipesIcon" toggle="mouseenter touchstart"></div>
+                        </div>
+                        <div class="col-xs-12 col-md-10">
+                            <div class="owl_slider"
+                                 data-ng-class="{'owl-carousel owl-theme center-block': true, 'user': homeVm.isLoggedIn === true, 'guest': homeVm.isLoggedIn === false}"
+                                 id="recipesSlider">
+                                <div class="item"
+                                     data-ng-repeat="object in homeVm.filtered.Recipes | unique: 'SiteObject.id'"
+                                     init-slider>
+                                    <div class="slider-panel">
+                                        <img src="//placehold.it/140x111/943885/ffa023?text=placeholder+thumbnail"
+                                             data-ng-if="object.SiteObject.thumbnail_path === null"
+                                             class="slider-thumbnail img-responsive" alt="{{::object.SiteObject.name}}">
+                                        <img data-ng-src="{{::object.SiteObject.thumbnail_path}}"
+                                             data-ng-if="object.SiteObject.thumbnail_path !== null"
+                                             class="slider-thumbnail img-responsive lazyOwl"
+                                             alt="{{::object.SiteObject.name}}">
+                                        <img data-ng-if="showSharingIcons"
+                                             src="//cdn.bubblesu.com/images/buttons/share-button.png"
+                                             class="thumbnail-share-button">
+
+                                        <div class="slider-panel-controls">
+                                            <bubblesu-heart site-object="object"
+                                                            user-id="index.userId"></bubblesu-heart>
+                                            <div class="slider-panel-controls-play thumbnail-play-button"
+                                                 data-ng-click="index.openRecipesModal($event,object)"
+                                                 alt="Play {{::object.SiteObject.name}}" analytics-on analytics-event="Open" analytics-category="Recipes" analytics-label="{{::object.SiteObject.name}}"></div>
+                                        </div>
+
+                                        <div class="slider-panel-caption">
+                                            {{::object.SiteObject.name}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Music -->
+                    <div id="music" class="row category category-music"
+                         data-ng-if="homeVm.filtered[homeVm.characterState].Audio.length > 0">
+                        <div class="hidden-sm hidden-xs col-sm-2 col-sm-pull-1 col-md-pull-0"
+                             style="position: relative; z-index:10;">
+                            <img src="//cdn.bubblesu.com/images/characters/bubbles/music-bubbles.png" class="buzz-out" height="190"
+                                 style="margin-top: 15px;"/>
+                        </div>
+                        <div class="col-xs-12 col-md-10">
+                            <div class="center-block slider-icon" id="category-music-icon" play-sound sound="musicIcon" toggle="mouseenter touchstart"></div>
+                        </div>
+                        <div class="col-xs-12 col-md-10">
+                            <div class="owl_slider"
+                                 data-ng-class="{'owl-carousel owl-theme center-block': true, 'user': homeVm.isLoggedIn === true, 'guest': homeVm.isLoggedIn === false}"
+                                 id="musicSlider">
+                                <div class="item"
+                                     data-ng-repeat="object in homeVm.filtered[homeVm.characterState].Audio | unique: 'SiteObject.id'"
+                                     init-slider>
+                                    <div class="slider-panel">
+                                        <img src="//placehold.it/140x111/943885/ffa023?text=placeholder+thumbnail"
+                                             data-ng-if="object.SiteObject.thumbnail_path === null"
+                                             class="slider-thumbnail img-responsive" alt="{{::object.SiteObject.name}}">
+                                        <img data-ng-src="{{::object.SiteObject.thumbnail_path}}"
+                                             data-ng-if="object.SiteObject.thumbnail_path !== null"
+                                             class="slider-thumbnail img-responsive lazyOwl"
+                                             alt="{{::object.SiteObject.name}}">
+                                        <img data-ng-if="showSharingIcons"
+                                             src="//cdn.bubblesu.com/images/buttons/share-button.png"
+                                             class="thumbnail-share-button">
+
+                                        <div class="slider-panel-controls">
+                                            <bubblesu-heart site-object="object"
+                                                            user-id="index.userId"></bubblesu-heart>
+                                            <div class="slider-panel-controls-play thumbnail-play-button"
+                                                 data-ng-click="index.openAudioModal($event,object)"
+                                                 alt="Play {{::object.SiteObject.name}}" analytics-on analytics-event="Open" analytics-category="Music" analytics-label="{{::object.SiteObject.name}}"></div>
+                                        </div>
+
+                                        <div class="slider-panel-caption">
+                                            {{::object.SiteObject.name}}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Funky Phonics -->
+                    <div id="funkyPhonics" class="row category category-phonics"
+                         data-ng-if="homeVm.filtered.FunkyPhonics.length > 0">
+                        <div class="hidden-sm hidden-xs col-sm-2 col-sm-pull-1 col-md-pull-0"
+                             style="position: relative; z-index:10;">
+                            <img src="//cdn.bubblesu.com/images/characters/bubbles/funky-phonics-bubbles.png" class="buzz-out" height="200"
+                                 style="margin-top: 10px;"
+                            />
+                        </div>
+                        <div class="col-xs-12 col-md-10">
+                            <div class="center-block slider-icon" id="category-phonics-icon" play-sound sound="phonicsIcon" toggle="mouseenter touchstart"></div>
+                        </div>
+                        <div class="col-xs-12 col-md-10">
+                            <div class="owl_slider"
+                                 data-ng-class="{'owl-carousel owl-theme center-block': true, 'user': homeVm.isLoggedIn === true, 'guest': homeVm.isLoggedIn === false}"
+                                 id="phonicsSlider">
+                                <div class="item"
+                                     data-ng-repeat="object in homeVm.filtered.FunkyPhonics | unique: 'SiteObject.id'"
+                                     init-slider>
+                                    <div class="slider-panel">
+                                        <img src="//placehold.it/140x111/943885/ffa023?text=placeholder+thumbnail"
+                                             data-ng-if="object.SiteObject.thumbnail_path === null"
+                                             class="slider-thumbnail img-responsive" alt="{{::object.SiteObject.name}}">
+                                        <img data-ng-src="{{::object.SiteObject.thumbnail_path}}"
+                                             data-ng-if="object.SiteObject.thumbnail_path !== null"
+                                             class="slider-thumbnail img-responsive lazyOwl"
+                                             alt="{{::object.SiteObject.name}}">
+                                        <img data-ng-if="showSharingIcons"
+                                             src="//cdn.bubblesu.com/images/buttons/share-button.png"
+                                             class="thumbnail-share-button">
+
+                                        <div class="slider-panel-controls">
+                                            <bubblesu-heart site-object="object"
+                                                            user-id="index.userId"></bubblesu-heart>
+                                            <div class="slider-panel-controls-play thumbnail-play-button"
+                                                 data-ng-click="index.openFunkyPhonicsModal($event,object)"
+                                                 alt="Play {{::object.SiteObject.name}}" analytics-on analytics-event="Open" analytics-category="Funky Phonics" analytics-label="{{::object.SiteObject.name}}"></div>
+                                        </div>
+
+                                        <div class="slider-panel-caption">
+                                            {{::object.SiteObject.name}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Banners-->
+    <div class="dark-gray-page">
+        <div class="container">
+            <div class="row ">
+                <div class="col-sm-6 text-center">
+                    <a class="banner" data-ng-click="homeVm.openKidsMagLinkModal($event)">
+                        <img src="//cdn.bubblesu.com/images/banners/magazine.png" style="max-width: 100%;    margin-top: -3px;"
+                             width="563">
+                    </a>
+                </div>
+                <div class="col-sm-6 text-center">
+                    <a class="banner" data-ng-click="index.goToBulletin()">
+                        <img src="//cdn.bubblesu.com/images/banners/bboard.png" style="max-width: 100%" width="563">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Apps -->
+    <div id="apps" class="upcoming-apps" data-ng-if="homeVm.filtered.App">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center pull-tab">
+                    <div class="tab visible-md visible-lg" pull-tab></div>
+                    <h3 class="app-title"><img src="//cdn.bubblesu.com/images/headline/our-happy-apps.png" alt="Our happy apps" play-sound sound="happyAppsIcon" toggle="mouseenter touchstart"/></h3>
+
+                    <p><img src="//cdn.bubblesu.com/images/headline/explore-our-bu-apps.png" alt="Explore our Bubbles University Apps"/></p>
+                </div>
+                <div class="col-sm-12">
+                    <div class="owl_slider owl-carousel owl-theme center-block" id="appSlider">
+                        <div data-ng-repeat="object in homeVm.filtered.App" init-slider>
+                            <div class="slider-panel" data-ng-class="homeVm.activeVideo==object?'active':''" data-ng-click="homeVm.setActiveVideo($event,object)">
+                                <img data-ng-src="{{::object.SiteObject.thumbnail_path}}"
+                                     data-ng-if="object.SiteObject.thumbnail_path !== null"
+                                     class="slider-thumbnail img-responsive lazyOwl"
+                                     alt="{{::object.SiteObject.name}}">
+                                <div class="slider-panel-caption">
+                                    {{::object.SiteObject.name}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-8 text-center">
+                    <div class="video-player">
+                        <video preload="none" id="appvideo" data-ng-src="{{homeVm.activeVideo.SiteObject.path}}" bubblesu-video data-thumbnail="{{homeVm.activeVideo.SiteObject.thumbnail_path}}"></video>
+                        <label class="sr-only" for="appvideo">Video: {{homeVm.activeVideo.SiteObject.name}}</label>
+                        <div class="left-right-border"></div>
+                        <div class="top-bottom-border"></div>
+                        <img src="//cdn.bubblesu.com/images/video_player/top-left-corner.png" class="top-left-corner" />
+                        <img src="//cdn.bubblesu.com/images/video_player/top-right-corner.png" class="top-right-corner" />
+                        <img src="//cdn.bubblesu.com/images/video_player/bottom-left-corner.png" class="bottom-left-corner" />
+                        <img src="//cdn.bubblesu.com/images/video_player/bottom-right-corner.png" class="bottom-right-corner" />
+                        <img src="//cdn.bubblesu.com/images/buttons/pause-icon.png" class="video-big-button video-big-pause img-responsive" onclick="videoPlay('appvideo')" alt="Pause {{homeVm.activeVideo.SiteObject.name}}">
+                        <img src="//cdn.bubblesu.com/images/buttons/play-button-big.png" class="video-big-button video-big-play img-responsive" onclick="videoPlay('appvideo')" alt="Play {{homeVm.activeVideo.SiteObject.name}}" analytics-on analytics-event="Play" analytics-category="App Trailer" analytics-label="{{::homeVm.activeVideo.SiteObject.name}}">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                <img src="//cdn.bubblesu.com/images/video_player/progress-bar-star.png" class="seek-star">
+                            </div>
+                        </div>
+                        <div class="video-controls">
+                            <ul class="video-menu">
+                                <li class="hidden-mobile" data-ng-hide="ua.os.family === 'iOS'"><img src="//cdn.bubblesu.com/images/buttons/volume-button.png" class="video-volume" onclick="videoMute()" alt="Mute Video" title="Mute Video" role="button"></li>
+                                <li data-ng-hide="ua.os.family === 'iOS' && ua.device.type === 'Mobile'"><img src="//cdn.bubblesu.com/images/buttons/expand-window-button.png" class="video-fullscreen" onclick="videoFullScreen()" alt="Watch video in fullscreen" title="Watch video in fullscreen" role="button"></li>
+                                <li class="hidden-mobile"><img src="//cdn.bubblesu.com/images/video_player/tablet-play-button.png" class="video-play" onclick="videoPlay('appvideo')" alt="Play/Pause video" title="Play/Pause video" role="button" analytics-on analytics-event="Play" analytics-category="App Trailer" analytics-label="{{::homeVm.activeVideo.SiteObject.name}}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <div class="app-description">
+                        <h3 class="app-title">{{homeVm.activeVideo.SiteObject.name}}</h3>
+                        <p>{{homeVm.activeVideo.SiteObject.description}}</p>
+                        <p class="text-center">
+                            <!-- Apple App Store -->
+                            <a href="{{homeVm.activeVideo.SiteObject.path2}}" target="_blank" style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-lrg.svg) no-repeat;width:165px;height:40px;" analytics-on analytics-event="Link" analytics-category="Apps (Apple)" analytics-label="{{::homeVm.activeVideo.SiteObject.name}}"></a>
+                            <!-- Google Play Store -->
+                            <a href="{{homeVm.activeVideo.SiteObject.path3}}" target="_blank" style="display:inline-block;overflow:hidden;background:url(https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png) no-repeat;background-size:contain;width:165px;height:40px;" title="Get it on Google Play" analytics-on analytics-event="Link" analytics-category="Apps (Google)" analytics-label="{{::homeVm.activeVideo.SiteObject.name}}"></a>
+                        </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/ng-template" id="kidsMagModal.html">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Download our Quarterly Magazine</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <p>Click on a badge to download the <strong>Bubbles U Kids Mag</strong> app</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 text-center">
+                        <a class="center-block" href="https://geo.itunes.apple.com/us/app/bubbles-u-mag/id963752263?mt=8" style="display:inline-block;overflow:hidden;background:url(http://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-lrg.svg) no-repeat;width:135px;height:40px;" target="_blank" analytics-on analytics-event="Link" analytics-category="Apps (Apple)" analytics-label="Bubbles U Kids Mag"></a>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 text-center">
+                        <a href="https://play.google.com/store/apps/details?id=com.infinixsoft.bubblesumag&hl=en&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1" target="_blank" analytics-on analytics-event="Link" analytics-category="Apps (Google)" analytics-label="Bubbles U Kids Mag">
+                            <img alt="Get it on Google Play" class="center-block" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png" height="40" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" type="button" data-ng-click="kidsMagVm.cancel()">Close</button>
+            </div>
+        </div>
+    </script>

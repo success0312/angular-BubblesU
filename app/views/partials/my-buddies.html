@@ -1,0 +1,154 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-2 col-md-3 text-center">
+            <div class="avatar">
+                <img data-ng-src="{{index.userAvatar || '//cdn.bubblesu.com/images/characters/bubbles/bubbles-avatar-icon.png'}}" data-ng-show="index.userAvatar !== null && index.userAvatar !== false" class="img-responsive center-block">
+                <h3>Me</h3>
+                <button class="btn btn-block change-avatar-btn" data-ng-click="index.avatarPopover($event)">Change Avatar</button>
+                <script type="text/ng-template" id="avatar-dialog.html">
+                    <md-dialog aria-label="Choose Your Avatar" ng-cloak>
+                        <form>
+                            <md-toolbar>
+                                <div class="md-toolbar-tools avatar-center-xs">
+                                    <h2>Choose Your Avatar</h2>
+                                        <span flex></span>
+                                    <md-button class="md-icon-button" ng-click="cancel()" aria-label="Cancel">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </md-button>
+                                </div>
+                            </md-toolbar>
+                            <md-dialog-content>
+                                <div class="md-dialog-content">
+                                    <div class="row" data-ng-hide="dialogVm.savingAvatar === true">
+                                        <div class="col-xs-12 text-center">
+                                            <div class="alert alert-danger" role="alert" data-ng-show="dialogVm.hasError === true">
+                                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                <span class="sr-only">Error:</span>
+                                                {{dialogVm.message}}
+                                            </div>
+                                            <em>Click on a picture to select your new avatar</em>
+                                        </div>
+                                    </div>
+                                    <div class="row" data-ng-show="dialogVm.savingAvatar === false">
+                                        <div class="col-xs-6 col-sm-3" data-ng-repeat="selectAvatar in dialogVm.avatars">
+                                            <img data-ng-src="{{selectAvatar.Avatar.image_path}}" class="img-responsive center-block" alt="Avatar #{{selectAvatar.Avatar.id}}" data-ng-click="choose(selectAvatar.Avatar.id)">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <p data-ng-hide="dialogVm.hasError === true">{{dialogVm.message}}</p>
+                                            <img src="//cdn.bubblesu.com/images/Loading-Stars-V2.gif" alt="Saving, Please Wait..." data-ng-show="dialogVm.showLoadingStars === true" class="center-block">
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-dialog-content>
+                        </form>
+                    </md-dialog>
+                </script>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <div class="portrait">
+                    <img src="//cdn.bubblesu.com/images/characters/bubbles/bubbles-avatar-icon.png" class="img-responsive center-block" ng-click="index.openMessagesModal('bubbles',index.userMessages.bubbles)">
+                    <span class="badge badge-warning" id="bubbles_badge" ng-show="index.userMessages.bubbles.newTotal>0">{{index.userMessages.bubbles.newTotal}}</span>
+                </div>
+                <div class="caption">Bubbles</div>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <div class="portrait">
+                    <img src="//cdn.bubblesu.com/images/characters/flexi/flexi-avatar-icon.png" class="img-responsive center-block" ng-click="index.openMessagesModal('flexi',index.userMessages.flexi)">
+                    <span class="badge badge-warning" id="flexi_badge" ng-show="index.userMessages.flexi.newTotal>0">{{index.userMessages.flexi.newTotal}}</span>
+                </div>
+                <div class="caption">Flexi</div>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <div class="portrait">
+                    <img src="//cdn.bubblesu.com/images/characters/lenny/lenny-avatar-icon.png" class="img-responsive center-block" ng-click="index.openMessagesModal('lenny',index.userMessages.lennylucy)">
+                    <span class="badge badge-warning" id="lenny_badge" ng-show="index.userMessages.lennylucy.newTotal>0">{{index.userMessages.lennylucy.newTotal}}</span>
+                </div>
+                <div class="caption">Lenny</div>
+            </div>
+        </div>
+
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <div class="portrait">
+                    <img src="//cdn.bubblesu.com/images/characters/lionstein/lionstein-avatar-icon.png" class="img-responsive center-block" ng-click="index.openMessagesModal('lionstein',index.userMessages.lionstein)">
+                    <span class="badge badge-warning" id="lionstein_badge" ng-show="index.userMessages.lionstein.newTotal>0">{{index.userMessages.lionstein.newTotal}}</span>
+                </div>
+                <div class="caption">Lionstein</div>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <div class="portrait">
+                    <img src="//cdn.bubblesu.com/images/characters/lucy/lucy-avatar-icon.png" class="img-responsive center-block" ng-click="index.openMessagesModal('lucy',index.userMessages.lennylucy)">
+                    <span class="badge badge-warning" id="lucy_badge" ng-show="index.userMessages.lennylucy.newTotal>0">{{index.userMessages.lennylucy.newTotal}}</span>
+                </div>
+                <div class="caption">Lucy</div>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <div class="portrait">
+                    <img src="//cdn.bubblesu.com/images/characters/misschievous/miss-chievous-avatar-icon.png" class="img-responsive center-block" ng-click="index.openMessagesModal('misschievous',index.userMessages.misschievous)">
+                    <span class="badge badge-warning" id="misschievous_badge" ng-show="index.userMessages.misschievous.newTotal>0">{{index.userMessages.misschievous.newTotal}}</span>
+                </div>
+                <div class="caption">Miss Chievous</div>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <div class="portrait">
+                    <img src="//cdn.bubblesu.com/images/characters/ping/ping-avatar-icon.png" class="img-responsive center-block" ng-click="index.openMessagesModal('ping',index.userMessages.ping)">
+                    <span class="badge badge-warning" id="ping_badge" ng-show="index.userMessages.ping.newTotal>0">{{index.userMessages.ping.newTotal}}</span>
+                </div>
+                <div class="caption">Ping</div>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <div class="portrait">
+                    <img src="//cdn.bubblesu.com/images/characters/tito/tito-avatar-icon.png" class="img-responsive center-block" ng-click="index.openMessagesModal('tito',index.userMessages.tito)">
+                    <span class="badge badge-warning" id="tito_badge" ng-show="index.userMessages.tito.newTotal>0">{{index.userMessages.tito.newTotal}}</span>
+                </div>
+                <div class="caption">Tito</div>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-1 text-center">
+            <div class="buddy-character">
+                <div class="portrait text-center">
+                    <img src="//cdn.bubblesu.com/images/characters/toucan/toucan-avatar-icon.png" class="img-responsive center-block" ng-click="index.openMessagesModal('twoplus',index.userMessages.twoplus)">
+                    <span class="badge badge-warning" id="twoplus_badge" ng-show="index.userMessages.twoplus.newTotal>0">{{index.userMessages.twoplus.newTotal}}</span>
+                </div>
+                <div class="caption">Twoplus</div>
+            </div>
+        </div>
+    </div><!-- /.row (1) -->
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-sm-push-3 text-center">
+            <div class="my-buddies-form refer-a-friend">
+                <h2 class="kb-planet-earth">Refer-A-Friend</h2>
+                <form name="index.referForm" novalidate>
+                    <div class="form-group">
+                        <input type="email" name="friendEmail" class="form-control" placeholder="Friend's e-mail" id="referEmail" data-ng-model="index.referFriendEmail" data-ng-disabled="index.referFriendSending === true" data-ng-required="true">
+                    </div><!-- /form-group -->
+
+                    <button class="btn btn-info" type="submit" data-ng-disabled="index.referFriendSending === true" data-ng-click="index.referForm.$valid && index.referAFriend()">Submit</button>
+
+                </form>
+                <div data-ng-show="index.referFriendSending === true">
+                    <p>Sending Referral E-mail...</p>
+                    <img src="//cdn.bubblesu.com/images/Loading-Stars-V2.gif" alt="Loading...Please Wait." class="img-responsive center-block" data-ng-show="index.referFriendSending === true">
+                </div>
+            </div>
+        </div>
+    </div><!-- /.row (2) -->
+</div>

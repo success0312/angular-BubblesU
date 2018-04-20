@@ -1,0 +1,85 @@
+angular.module('App.homeController', [])
+    .controller('homeIndexController', function ($animate, $scope, $rootScope, $filter, $routeParams, $window, $mdDialog, $uibModal, Home, localStorageService, Storage, $log, ApiKey, User, $timeout) {
+		var self = this;
+		self.guestHomeData = null;
+		self.userHomeData = null;
+		self.character = null;
+		self.filtered = null;
+        self.userId = null;
+        self.activeVideo = null;
+        self.isLoggedIn = ApiKey.isLoggedIn();
+
+		// enable animations
+		$animate.enabled(true);
+
+		if ($routeParams.character === "" || $routeParams.character === "loginsuccess" || $routeParams.character === "logoutsuccess") {
+			self.character = 'bubblesu';
+		} else {
+			self.character = $routeParams.character;
+        }
+
+        if ($routeParams.section) {
+            $animate.enabled(false);
+            $timeout(function(){
+                var $target = $('#'+$routeParams.section);
+                if ($target.offset() != undefined) {
+                    $("body,html").animate({scrollTop: $target.offset().top}, "slow");
+                }
+            }, 0);
+        }
+
+		if ( ApiKey.getApiKey() === false ) {
+            var promise = Home.getGuestFilteredData();
+            promise.then( function( filteredData ) {
+<<<<<<< HEAD
+                self.filtered = filteredData;
+                // get random app index
+    			self.filtered.randomAppIndex = Math.floor((Math.random() * self.filtered.App.length));
+                self.activeVideo = self.filtered.App[self.filtered.randomAppIndex];
+=======
+                setFilteredData(filteredData);
+>>>>>>> release-1-Crosby
+                // start signup nag coundown
+                if ( $scope.index.signupNag === null ) {
+                    $scope.index.startSignupNag();
+                }
+            });
+		} else {
+            User.getUser().then(
+                function ( userData ) {
+                    self.userId = userData[1];
+                    Home.getUserFilteredData( self.userId ).then(
+                        function( filteredData ) {
+<<<<<<< HEAD
+                            self.filtered = filteredData;
+                            // get random app index
+                            self.filtered.randomAppIndex = Math.floor( ( Math.random() * self.filtered.App.length ) );
+                            self.activeVideo = self.filtered.App[self.filtered.randomAppIndex];
+=======
+                            setFilteredData(filteredData);
+                        },
+                        function ( error ) {
+                            $log.error(error);
+                            Home.getGuestFilteredData().then( function(filteredData) {
+                                setFilteredData(filteredData);
+                            });
+>>>>>>> release-1-Crosby
+                        }
+                    );
+                }
+            );
+		}
+
+<<<<<<< HEAD
+        self.setActiveVideo = function (ev, ob) {
+            self.activeVideo = ob;
+        };
+
+=======
+        function setFilteredData(filteredData) {
+            self.filtered = filteredData;
+            // get random app index
+            self.filtered.randomAppIndex = Math.floor((Math.random() * self.filtered.App.length));
+        }
+>>>>>>> release-1-Crosby
+	});

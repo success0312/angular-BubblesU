@@ -1,0 +1,371 @@
+<div class="container-fluid my-account-header">
+    <header>
+        <h1 class="text-center">My Account</h1>
+    </header>
+</div>
+<div id="contentWrapper">
+    <div class="my-account arial">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <uib-tabset>
+                        <!-- Account Overview -->
+                        <uib-tab heading="Account Overview">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h2>Account Summary</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <p><strong>Username/Email</strong>:{{index.userInfo.User.username}}</p>
+                                    <p>
+                                        <strong>Name</strong>:
+                                        <input type="text" class="userName-form" data-ng-style="accountVm.style" data-ng-disabled="accountVm.state" data-ng-model ="index.userInfo.User.name" />                                        
+                                        <a data-ng-show="accountVm.state" data-ng-click="accountVm.toggleState()">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>                                                          
+                                        <a data-ng-hide="accountVm.state" data-ng-click="accountVm.updateUserInfo($event, index.userInfo.User.name, index.userInfo.User.id)">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+                                    </p>
+                                    <p><strong>Password</strong>: <a data-ng-click="accountVm.openPasswordDialog($event)">Change Password</a></p>
+                                    <p class="delete-link" data-ng-show="accountVm.hasActiveSubscription">
+                                        <a data-ng-click="accountVm.openDeleteDialog($event)">Deactivate My Account</a>
+                                    </p>
+                                    <p class="unsubscribe" data-ng-show="accountVm.hasActiveSubscription">
+                                        <a data-ng-click="accountVm.openUnsubscribeDialog($event)">Unsubscribe from emails</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h2>Subscription Status</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <!-- Payment Option Well -->
+                                    <div class="well well-lg" data-ng-show="accountVm.hasActiveSubscription" data-ng-cloak>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="payment-option">
+                                                    <div class="media">
+                                                        <div class="media-left">
+                                                            <img data-ng-src="//cdn.bubblesu.com/images/icons/{{accountVm.activeSubscriptionIcon}}_icon.png" alt="Payment Icon" class="payment-icon" data-ng-show="accountVm.activeSubscriptionIcon !== null">
+                                                        </div>
+                                                        <div class="media-body media-middle">
+                                                            <h3 class="media-heading"><span style="text-transform:capitalize;">{{accountVm.activeSubscriptionType}}</span> Subscription</h3>
+                                                            <!-- Apple Info -->
+                                                            <p data-ng-if="accountVm.paymentOption === 'Apple App Store'">How to view/update your Apple App Store Subscription: <a href="https://support.apple.com/en-us/HT202039" target="_blank">View, Change or Cancel your subscriptions</a>.</p>
+                                                            <!-- Google Info -->
+                                                            <p data-ng-if="accountVm.paymentOption === 'Google Play Store'">How to view/update your Google Play Store Subscription: <a href="https://support.google.com/googleplay/answer/2476088" target="_blank">Subscriptions on Google Play</a>.</p>
+                                                            <!-- Credit Card Info -->
+                                                            <p data-ng-if="accountVm.paymentOption === 'Credit Card'"><strong>{{accountVm.paymentCreditType}}</strong> Card ending in: {{accountVm.paymentCreditNumber}}</p>
+                                                            <p data-ng-if="accountVm.paymentOption === 'Credit Card'">Expiration Date: {{accountVm.paymentExpMonth}}/{{accountVm.paymentExpYear}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="well well-lg" data-ng-hide="accountVm.hasActiveSubscription" data-ng-cloak>
+                                        <div class="row">
+                                            <div class="col-xs-12 text-center">
+                                                No Active Subscription Found
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modify Payment Option Form -->
+                                    <form data-ng-show="accountVm.showUpdateForm" data-ng-cloak>
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-sm-6">
+                                                <label><input type="radio" name="paymentMethod"> Credit Card</label>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6">
+                                                <label><input type="radio" name="paymentMethod"> PayPal</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="card-number">Credit Card Number</label>
+                                            <input type="text" class="form-control" id="card-number" data-ng-model="accountVm.cardNumber" placeholder="Enter 16-Digit Card Number" maxlength="16" minlength="16">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Expiration Date</label>
+                                            <select data-ng-model="accountVm.expMonth">
+                                                <option value="">MM</option>
+                                                <option value="01">1</option>
+                                                <option value="02">2</option>
+                                                <option value="03">3</option>
+                                                <option value="04">4</option>
+                                                <option value="05">5</option>
+                                                <option value="06">6</option>
+                                                <option value="07">7</option>
+                                                <option value="08">8</option>
+                                                <option value="09">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                            <select data-ng-model="accountVm.expYear">
+                                                <option value="">YYYY</option>
+                                                <option data-ng-repeat="year in accountVm.getExpirationYears(13)" value="{{year}}">{{year}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="security-code">Security Code</label>
+                                            <input type="text" id="security-code" class="form-control" placeholder="Enter Security Code" data-ng-model="accountVm.securityCode">
+                                        </div>
+                                        <button class="btn btn-info" data-ng-click="accountVm.updateCardSubscription()">Update</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </uib-tab>
+
+                        <!-- Billing History -->
+                        <uib-tab heading="Billing History">
+                            <h2>Billing History</h2>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="well well-lg text-center" data-ng-hide="accountVm.userSubscriptions.length > 0" data-ng-cloak>
+                                        <p>No Subscriptions Found.</p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-3 col-sm-push-9"  data-ng-show="accountVm.userSubscriptions.length > 0">
+                                    <p>View History From:</p>
+                                    <div>
+                                        <select class="form-group" data-ng-model="accountVm.billingPeriod">
+                                            <option value="-1">All Time</option>
+                                            <option value="1">Last Month</option>
+                                            <option value="3">Last 3 Months</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-9 col-sm-pull-3" data-ng-show="accountVm.userSubscriptions.length > 0">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Subscription</th>
+                                                    <th>Status</th>
+                                                    <th>Expiration Date</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="subscription in accountVm.userSubscriptions | viewFrom : accountVm.billingPeriod | orderBy: '-UserSubscription.created'">
+                                                    <td>{{subscription.UserSubscription.created | parseDate | date: "MM/dd/yyyy"}}</td>
+                                                    <td>{{subscription.Subscription.description}}</td>
+                                                    <td>{{ !accountVm.isExpired( subscription ) | subActive }}</td>
+                                                    <td>{{subscription.UserSubscription.expiration | parseDate | date : "MM/dd/yyyy" }}</td>
+                                                    <td>{{subscription.Subscription.cost | currency }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </uib-tab>
+
+                        <!-- Account Activity -->
+                        <uib-tab heading="Account Activity">
+                            <!-- Unlocked Games -->
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-5">
+                                    <h2>Unlocked Games</h2>
+                                </div>
+                                <div class="col-xs-12 col-sm-7 text-right" data-ng-cloak>
+                                    <p><strong>Unlocks Remaining: {{accountVm.userGameUnlocks}}</strong></p>
+                                    <p data-ng-show="accountVm.hasActiveSubscription">Your account will be credited with <strong>4 additional unlocks</strong> in <strong>{{accountVm.daysLeft}}</strong> days</p>
+                                </div>
+                            </div>
+                            <div class="row activity-games-list" data-ng-show="accountVm.hasActivity" data-ng-cloak>
+                                <div class="col-xs-6 col-sm-3 col-md-2" data-ng-repeat="activity in accountVm.userGameActivity | unique: 'Game.name'">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <img data-ng-src="{{activity.SiteObject.thumbnail_path}}" alt="{{activity.Game.name}}" class="unlock-logo img-responsive center-block">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <p>{{activity.Game.name}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row activity-games-list" data-ng-hide="accountVm.hasActivity" data-ng-cloak>
+                                <div class="col-xs-12">
+                                    <div class="well well-lg text-center">
+                                        <p>You have not unlocked any games.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Achievements -->
+                            <div class="row activity-header" data-ng-show="accountVm.hasActivity" data-ng-cloak>
+                                <div class="col-xs-12">
+                                    <h2>Current Progress</h2>
+                                </div>
+                            </div>
+                            <div class="row" data-ng-show="accountVm.hasActivity" data-ng-cloak>
+                                <div class="col-xs-12">
+                                    <!-- accordion -->
+                                    <md-content>
+                                        <md-list>
+
+                                         <!--    <md-list-item class="md-3-line" ng-repeat="progress in accountVm.userGameActivity | unique: 'UserGamesProgress.id'"> -->
+                                            <md-list-item class="md-3-line" ng-repeat="progress in accountVm.userGameActivity | orderByDate :'created':true">
+                                                <img data-ng-src="{{progress.SiteObject.thumbnail_path}}" class="md-avatar" alt="{{progress.Game.name}}">
+                                                <div class="md-list-item-text" layout="column">
+                                                    <h3>{{progress.Game.name}}</h3>
+                                                    <h4>Level {{accountVm.getLevel(progress.UserGamesProgress.progress_data)}}</h4>
+                                                    <p>On {{progress.UserGamesProgress.created | parseDate | date: 'medium'}}</p>
+                                                    <md-divider></md-divider>
+                                                </div>
+                                            </md-list-item>
+                                        </md-list>
+                                    </md-content>
+                                </div>
+                            </div>
+                        </uib-tab>
+                    </uib-tabset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="password-template.html">
+    <md-dialog aria-label="Change My Password">
+        <form name="changePasswordCtrl.passwordForm">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 class="text-center">Change My Password</h2>
+                    <span flex></span>
+                    <md-button class="md-icon-button" data-ng-disabled="changePasswordCtrl.isChanging" data-ng-click="changePasswordCtrl.cancel()" aria-label="Cancel">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <md-dialog-content>
+                <div class="md-dialog-content" role="document" data-ng-show="changePasswordCtrl.showLoadingStars" data-ng-cloak>
+                    <p>{{changePasswordCtrl.message}}</p>
+                    <div><img src="//cdn.bubblesu.com/images/Loading-Stars-V2.gif" alt="Loading...Please Wait." class="img-responsive center-block"></div>
+                </div>
+                <div class="md-dialog-content" role="document" data-ng-hide="changePasswordCtrl.isChanging">
+                    <div class="alert alert-info" role="alert" data-ng-hide="changePasswordCtrl.requestFailed" data-ng-cloak>
+                        <span class="glyphicon glyphicon-info-sign"></span> Password must be at least 6 characters in length.
+                    </div>
+                    <div class="alert alert-danger" role="alert" data-ng-show="changePasswordCtrl.requestFailed" data-ng-cloak>
+                        <span class="glyphicon glyphicon-exclamation-sign"></span> {{changePasswordCtrl.message}}
+                    </div>
+                    <div data-ng-class="{'form-group': true, 'has-error': (changePasswordCtrl.passwordForm.password.$dirty && changePasswordCtrl.passwordForm.password.$invalid) || changePasswordCtrl.hasError === true}">
+                        <label for="password">New Password</label>
+                        <input class="form-control" name="password" data-ng-model="changePasswordCtrl.newPassword" type="password" data-ng-minlength="6" required>
+                        <span class="help-block" data-ng-show="changePasswordCtrl.passwordForm.password.$dirty && changePasswordCtrl.passwordForm.password.$invalid" data-ng-cloak>
+                          Please enter a valid password (minimum 6 characters).
+                        </span>
+                        <span class="help-block" data-ng-show="changePasswordCtrl.hasError" data-ng-cloak>
+                            {{changePasswordCtrl.message}}
+                        </span>
+                    </div>
+                    <div data-ng-class="{'form-group': true, 'has-error': changePasswordCtrl.passwordForm.verify.$dirty && changePasswordCtrl.passwordForm.verify.$invalid}">
+                        <label for="password">Verify New Password</label>
+                        <input class="form-control" name="verify" data-ng-model="changePasswordCtrl.verifyPassword" type="password" required data-ng-minlength="6">
+                        <span class="help-block" data-ng-show="changePasswordCtrl.passwordForm.verify.$dirty && changePasswordCtrl.passwordForm.verify.$invalid" data-ng-cloak>
+                          Passwords must match.
+                        </span>
+                    </div>
+                </div>
+            </md-dialog-content>
+            <md-dialog-actions layout="row" class="md-actions" data-ng-hide="changePasswordCtrl.isChanging">
+                <span flex></span>
+                <md-button ng-click="changePasswordCtrl.cancel()" data-ng-disabled="changePasswordCtrl.isChanging">Cancel</md-button>
+                <md-button ng-disabled="changePasswordCtrl.isChanging === true || changePasswordCtrl.passwordForm.$invalid" data-ng-click="changePasswordCtrl.passwordForm.$valid && changePasswordCtrl.confirm()">Change</md-button>
+            </md-dialog-actions>
+        </form>
+    </md-dialog>
+</script>
+<script type="text/ng-template" id="delete-template.html">
+    <md-dialog aria-label="Deactivate My BubblesU Account">
+        <form>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 class="text-center">Deactivate My Account</h2>
+                    <span flex></span>
+                    <md-button class="md-icon-button" data-ng-disabled="deleteCtrl.isDeleting" data-ng-click="deleteCtrl.cancel()" aria-label="Cancel">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <md-dialog-content data-ng-show="deleteCtrl.isDeleting" data-ng-cloak>
+                <div class="md-dialog-content" role="document">
+                    <p>{{deleteCtrl.message}}</p>
+                    <div>
+                        <img src="//cdn.bubblesu.com/images/Loading-Stars-V2.gif" alt="Loading...Please Wait." class="img-responsive center-block">
+                    </div>
+                </div>
+            </md-dialog-content>
+            <md-dialog-content data-ng-hide="deleteCtrl.isDeleting">
+                <div class="md-dialog-content" role="document">
+                    <div class="alert alert-danger" role="alert" data-ng-show="deleteCtrl.requestFailed" data-ng-show="deleteCtrl.requestFailed" data-ng-cloak>
+                        <span class="glyphicon glyphicon-exclamation-sign"></span> {{deleteCtrl.message}}
+                    </div>
+                    <p>
+                        Are you sure you want to deactivate your account?
+                    </p>
+                    <md-checkbox data-ng-model="deleteCtrl.confirmChecked" aria-label="Yes, I understand and I want to deactivate my account">
+                        Yes, I understand and want to deactivate my account.
+                    </md-checkbox>
+                </div>
+            </md-dialog-content>
+            <md-dialog-actions layout="row" class="md-actions" data-ng-hide="deleteCtrl.isDeleting">
+                <span flex></span>
+                <md-button data-ng-click="deleteCtrl.cancel()">Cancel</md-button>
+                <md-button data-ng-disabled="deleteCtrl.confirmChecked" data-ng-click="deleteCtrl.confirmChecked === true && deleteCtrl.confirm()">Deactivate</md-button>
+            </md-dialog-actions>
+        </form>
+    </md-dialog>
+</script>
+
+<script type="text/ng-template" id="unsubscribe-template.html">
+    <md-dialog aria-label="Unsubscribe from emails">
+        <form>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 class="text-center">Unsubscribe from emails</h2>
+                    <span flex></span>
+                    <md-button class="md-icon-button" data-ng-disabled="deleteCtrl.isDeleting" data-ng-click="deleteCtrl.cancel()" aria-label="Cancel">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <md-dialog-content data-ng-show="deleteCtrl.isDeleting" data-ng-cloak>
+                <div class="md-dialog-content" role="document">
+                    <p>{{deleteCtrl.message}}</p>
+                    <div>
+                        <img src="//cdn.bubblesu.com/images/Loading-Stars-V2.gif" alt="Loading...Please Wait." class="img-responsive center-block">
+                    </div>
+                </div>
+            </md-dialog-content>
+            <md-dialog-content data-ng-hide="deleteCtrl.isDeleting">
+                <div class="md-dialog-content" role="document">
+                    <div class="alert alert-danger" role="alert" data-ng-show="deleteCtrl.requestFailed" data-ng-show="deleteCtrl.requestFailed" data-ng-cloak>
+                        <span class="glyphicon glyphicon-exclamation-sign"></span> {{deleteCtrl.message}}
+                    </div>
+                    <p>
+                        Are you sure you want to unsubscribe from emails?
+                    </p>
+                    <md-checkbox data-ng-model="deleteCtrl.confirmChecked" aria-label="Yes, I understand and I want to deactivate my account">
+                        Yes, I understand and want to unsubscribe from emails.
+                    </md-checkbox>
+                </div>
+            </md-dialog-content>
+            <md-dialog-actions layout="row" class="md-actions" data-ng-hide="deleteCtrl.isDeleting">
+                <span flex></span>
+                <md-button data-ng-click="deleteCtrl.cancel()">Cancel</md-button>
+                <md-button data-ng-disabled="deleteCtrl.confirmChecked" data-ng-click="deleteCtrl.confirmChecked === true && deleteCtrl.confirm()">Unsubscribe</md-button>
+            </md-dialog-actions>
+        </form>
+    </md-dialog>
+</script>

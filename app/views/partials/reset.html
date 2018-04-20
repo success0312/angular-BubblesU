@@ -1,0 +1,47 @@
+<div class="container-fluid my-account-header">
+    <header>
+        <h1 class="text-center">Reset Password</h1>
+    </header>
+</div>
+<div id="contentWrapper">
+    <div class="my-account arial">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="reset-password">
+                        <div class="alert alert-info" role="alert" data-ng-hide="resetVm.requestFailed || resetVm.passwordChanged" data-ng-cloak>
+                            <span class="glyphicon glyphicon-info-sign"></span> Password must be at least 6 characters in length.
+                        </div>
+                        <div class="alert alert-danger" role="alert" data-ng-show="resetVm.requestFailed" data-ng-cloak>
+                            <span class="glyphicon glyphicon-exclamation-sign"></span> {{resetVm.message}}
+                        </div>
+                        <div class="alert alert-success" role="alert" data-ng-show="resetVm.passwordChanged" data-ng-cloak>
+                            <span class="glyphicon glyphicon glyphicon-ok"></span> {{resetVm.message}}
+                        </div>
+                        <form name="resetVm.passwordForm" data-ng-hide="resetVm.passwordChanged" data-ng-submit="resetVm.passwordForm.$valid && resetVm.confirm()">
+                            <div data-ng-class="{'form-group': true, 'has-error': (resetVm.passwordForm.password.$dirty && resetVm.passwordForm.password.$invalid) || resetVm.hasError === true}">
+                                <label for="password">New Password</label>
+                                <input class="form-control" name="password" data-ng-model="resetVm.newPassword" type="password" data-ng-minlength="6" required>
+                                <span class="help-block" data-ng-show="resetVm.passwordForm.password.$dirty && resetVm.passwordForm.password.$invalid" data-ng-cloak>
+                                  Please enter a valid password (minimum 6 characters).
+                                </span>
+                            </div>
+                            <div data-ng-class="{'form-group': true, 'has-error': resetVm.passwordForm.verify.$dirty && resetVm.passwordForm.verify.$invalid}">
+                                <label for="password">Verify New Password</label>
+                                <input class="form-control" name="verify" data-ng-model="resetVm.verifyPassword" type="password" required data-ng-minlength="6">
+                                <span class="help-block" data-ng-show="resetVm.passwordForm.verify.$dirty && resetVm.passwordForm.verify.$invalid" data-ng-cloak>
+                                  Passwords must match.
+                                </span>
+                            </div>
+                            <button ng-disabled="resetVm.isChanging === true || resetVm.passwordForm.$invalid" data-ng-click="resetVm.passwordForm.$valid && resetVm.confirm()" type="submit">Reset Password</button>
+                            <div data-ng-show="resetVm.showLoadingStars" data-ng-cloak>
+                                <p class="text-center">{{resetVm.message}}</p>
+                                <div><img src="//cdn.bubblesu.com/images/Loading-Stars-V2.gif" alt="Loading...Please Wait." class="img-responsive center-block"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

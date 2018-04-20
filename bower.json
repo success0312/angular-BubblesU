@@ -1,0 +1,37 @@
+{
+  "name": "AngularMaterialDotNet.Web",
+  "version": "0.0.0",
+  "authors": [
+    "Matt Spaulding <mrmattspaulding@gmail.com>"
+  ],
+  "description": "bower init",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.6",
+    "angular-route": "~1.4.6",
+    "angular-bootstrap": "~0.14.3",
+    "angular-local-storage": "~0.2.2",
+    "angular-material": "~0.11.0",
+    "angular-material-icons": "~0.6.0",
+    "angular-messages": "~1.4.6",
+    "angular-resource": "~1.4.6",
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4",
+    "svg-morpheus": "~0.1.8",
+    "jquery-ui": "~1.11.4",
+    "angular-cookies": "~1.4.7",
+    "ng-fastclick": "~1.0.2",
+    "SoundManager2": "soundmanager2#*",
+    "angulartics-google-analytics": "^0.1.4"
+  }
+}
